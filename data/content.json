@@ -1,0 +1,177 @@
+{
+  "hero": {
+    "headline": "Glow All Flight Long.",
+    "subheadline": "Premium In-Flight Hydrating Gel Designed To Keep Your Skin Fresh, Dewy & Radiant At Altitude.",
+    "primaryCtaText": "Order on WhatsApp",
+    "primaryCtaPrefill": "Hi AirHydra, I want to order the In-Flight Hydrating Gel",
+    "secondaryCtaText": "Find Pickup Store",
+    "heroImage": "https://ik.imagekit.io/360t0n1jd9/airhydra/hero/taha-RwVqa6ST69E-unsplash_23pW_VMqX.jpg",
+    "productImage": "https://ik.imagekit.io/360t0n1jd9/airhydra/product/IMG_7789-removebg-preview_AnXmZSqx1.png",
+    "overlayOpacity": 0.15,
+    "trustBadges": [
+      "TSA Cabin Friendly",
+      "Dermatologist Safe",
+      "Premium Travel Formula",
+      "Fast Nationwide Delivery"
+    ],
+    "heroImageFileId": "69f49a3e5c7cd75eb8d9f604",
+    "productImageFileId": "69f49a555c7cd75eb8da6cda"
+  },
+  "problem": {
+    "headline": "Cabin Air Is Destroying Your Skin",
+    "description": "Aircraft cabins have humidity levels as low as 10% — far below the 40–60% your skin needs. Every long-haul flight leaves you dehydrated, puffy, and dull.",
+    "problemPoints": [
+      {
+        "title": "Extreme Dryness",
+        "description": "Low cabin humidity strips moisture from your skin within the first hour of flight.",
+        "image": "https://ik.imagekit.io/360t0n1jd9/airhydra/problem/tony-sebastian-Qw89HvIVu18-unsplash_CNkLSO7DG.jpg",
+        "imageFileId": "69f4a33d5c7cd75eb816e429"
+      },
+      {
+        "title": "Puffiness & Fatigue",
+        "description": "Recirculated air and pressure changes cause inflammation and visible tiredness.",
+        "image": "https://ik.imagekit.io/360t0n1jd9/airhydra/problem/bhakti-parab-mtaVk-h7lgk-unsplash_IMPIOPI9d.jpg",
+        "imageFileId": "69f4a6565c7cd75eb830015c"
+      }
+    ]
+  },
+  "benefits": {
+    "headline": "Engineered for Altitude",
+    "subheadline": "Every ingredient chosen to combat the unique stress of air travel.",
+    "benefitsList": [
+      {
+        "title": "Deep Hydration",
+        "icon": "💧"
+      },
+      {
+        "title": "Reduces Puffiness",
+        "icon": "✨"
+      },
+      {
+        "title": "Boosts Radiance",
+        "icon": "☀️"
+      },
+      {
+        "title": "Travel-Friendly",
+        "icon": "✅"
+      },
+      {
+        "title": "All Skin Types",
+        "icon": "🌿"
+      },
+      {
+        "title": "Fast Absorbing",
+        "icon": "⚡"
+      }
+    ]
+  },
+  "howItWorks": {
+    "headline": "Three Steps to Radiant Skin",
+    "steps": [
+      {
+        "step": "01",
+        "title": "Cleanse",
+        "desc": "Start with a clean face before boarding or shortly after takeoff."
+      },
+      {
+        "step": "02",
+        "title": "Apply",
+        "desc": "Smooth a small amount of AirHydra over your face and neck."
+      },
+      {
+        "step": "03",
+        "title": "Arrive Glowing",
+        "desc": "Reapply every 2–3 hours and land looking refreshed and radiant."
+      }
+    ]
+  },
+  "lifestyle": {
+    "headline": "Your Skin Deserves First-Class Treatment",
+    "description": "AirHydra is more than skincare — it's a ritual for the discerning traveller. Engineered for altitude, designed for luxury. Because how you arrive matters.",
+    "ctaText": "Order on WhatsApp",
+    "ctaPrefill": "Hi AirHydra, I'd like to order — I want to glow all flight long.",
+    "image": "https://ik.imagekit.io/360t0n1jd9/airhydra/lifestyle/IMG_7791_4jr7fGE5-.PNG",
+    "imageFileId": "69f4aa6b5c7cd75eb84b3998"
+  },
+  "testimonials": {
+    "headline": "Loved by Frequent Flyers",
+    "testimonialsList": [
+      {
+        "name": "Jessica W.",
+        "rating": 5,
+        "text": "I used to land with such dull, tired skin. AirHydra is a game-changer. I now arrive looking and feeling fresh."
+      },
+      {
+        "name": "Alex T.",
+        "rating": 5,
+        "text": "As a frequent business traveler, this is a must-have. It's the first thing I pack. No more post-flight breakouts."
+      },
+      {
+        "name": "Priya M.",
+        "rating": 5,
+        "text": "Finally a product that actually works at altitude. My skin feels incredible after every long-haul flight."
+      }
+    ]
+  },
+  "stores": {
+    "headline": "Available Near You",
+    "storesList": [
+      {
+        "name": "JFK - Terminal 4",
+        "address": "John F. Kennedy International Airport, Terminal 4, Jamaica, NY 11430",
+        "city": "New York, NY",
+        "mapsLink": "https://maps.google.com/?q=JFK+Terminal+4",
+        "contactNumber": "+1 718 244 4444",
+        "availability": "In Stock",
+        "pickupInstructions": "Available at the main retail kiosk near Gate B30."
+      },
+      {
+        "name": "LAX - Tom Bradley Intl.",
+        "address": "Los Angeles International Airport, Tom Bradley International Terminal, Los Angeles, CA 90045",
+        "city": "Los Angeles, CA",
+        "mapsLink": "https://maps.google.com/?q=LAX+Tom+Bradley+International+Terminal",
+        "contactNumber": "+1 310 646 5252",
+        "availability": "Low Stock",
+        "pickupInstructions": "Ask for AirHydra at the beauty counter near the departure lounge."
+      },
+      {
+        "name": "LHR - Terminal 5",
+        "address": "Heathrow Airport, Terminal 5, London TW6 2GA",
+        "city": "London, UK",
+        "mapsLink": "https://maps.google.com/?q=Heathrow+Terminal+5",
+        "contactNumber": "+44 844 335 1801",
+        "availability": "In Stock",
+        "pickupInstructions": "Available at the travel essentials store after security."
+      }
+    ]
+  },
+  "faqs": {
+    "headline": "Everything You Need to Know",
+    "faqList": [
+      {
+        "question": "Is AirHydra suitable for all skin types?",
+        "answer": "Yes! Our formula is dermatologist-tested and designed to be gentle and effective for sensitive, oily, dry, and combination skin."
+      },
+      {
+        "question": "How often should I apply it during a flight?",
+        "answer": "For best results, we recommend applying a small amount every 2–3 hours during your flight to maintain optimal hydration levels."
+      },
+      {
+        "question": "Can I use it even if I'm not flying?",
+        "answer": "Absolutely. AirHydra is a fantastic daily moisturizer, perfect for combating dry environments like air-conditioned offices or cold climates."
+      }
+    ]
+  },
+  "finalCta": {
+    "headline": "Glow All Flight Long.",
+    "description": "Join thousands of travellers who refuse to land looking tired. Order AirHydra now — fast delivery or in-store pickup available.",
+    "ctaText": "Order AirHydra on WhatsApp",
+    "ctaPrefill": "Hi AirHydra, I'm ready to order the In-Flight Hydrating Gel."
+  },
+  "settings": {
+    "whatsappNumber": "+2347072387362",
+    "urgencyText": "First batch now available. Order yours today.",
+    "stickyCtaText": "Order on WhatsApp",
+    "stickyCtaPrefill": "Hi AirHydra, I want to order the In-Flight Hydrating Gel"
+  }
+}
