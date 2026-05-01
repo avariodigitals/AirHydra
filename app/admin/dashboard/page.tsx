@@ -65,7 +65,6 @@ function ImageUploader({
   onUploaded: (result: { url: string; fileId?: string }) => void;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [staged, setStaged] = useState<File | null>(null);
   const [stagedPreview, setStagedPreview] = useState("");
   const [progress, setProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
@@ -75,34 +74,31 @@ function ImageUploader({
   const handlePick = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    setStaged(file);
     setStagedPreview(URL.createObjectURL(file));
     setDone(false);
     setError("");
     setProgress(0);
     e.target.value = "";
+    // auto-upload immediately
+    uploadFile(file);
   };
 
-  const handleUpload = async () => {
-    if (!staged) return;
+  const uploadFile = async (file: File) => {
     setError("");
     setUploading(true);
     setProgress(0);
     setDone(false);
 
     try {
-      // 1. Get auth params from our server (fast — no file involved)
       const authRes = await fetch("/api/imagekit-auth");
       if (!authRes.ok) throw new Error("Auth failed");
       const { token, expire, signature } = await authRes.json();
 
-      const publicKey = process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY!;
-
       const form = new FormData();
-      form.append("file", staged);
-      form.append("fileName", staged.name);
+      form.append("file", file);
+      form.append("fileName", file.name);
       form.append("folder", folder);
-      form.append("publicKey", publicKey);
+      form.append("publicKey", process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY!);
       form.append("signature", signature);
       form.append("expire", String(expire));
       form.append("token", token);
@@ -114,17 +110,13 @@ function ImageUploader({
           if (e.lengthComputable) setProgress(Math.round((e.loaded / e.total) * 100));
         };
         xhr.onload = () => {
-          if (xhr.status >= 200 && xhr.status < 300) {
-            resolve(JSON.parse(xhr.responseText));
-          } else {
-            reject(new Error(JSON.parse(xhr.responseText)?.message || "Upload failed"));
-          }
+          if (xhr.status >= 200 && xhr.status < 300) resolve(JSON.parse(xhr.responseText));
+          else reject(new Error(JSON.parse(xhr.responseText)?.message || "Upload failed"));
         };
         xhr.onerror = () => reject(new Error("Network error"));
         xhr.send(form);
       });
 
-      // 3. Delete old asset in background (non-blocking)
       if (currentFileId) {
         fetch("/api/upload", {
           method: "DELETE",
@@ -136,7 +128,6 @@ function ImageUploader({
       setProgress(100);
       setDone(true);
       setUploading(false);
-      setStaged(null);
       onUploaded({ url: data.url, fileId: data.fileId });
     } catch (err: any) {
       setError(err.message);
@@ -154,11 +145,7 @@ function ImageUploader({
       {displayUrl && (
         <div className="mb-4 rounded-2xl overflow-hidden bg-cream aspect-video w-full max-w-sm relative">
           <img src={displayUrl} alt="Preview" className="w-full h-full object-cover" />
-          {staged && !uploading && (
-            <div className="absolute top-2 right-2 bg-amber-400 text-white text-xs font-medium px-2 py-1 rounded-full">
-              Not uploaded yet
-            </div>
-          )}
+
           {done && (
             <div className="absolute top-2 right-2 bg-green-500 text-white text-xs font-medium px-2 py-1 rounded-full flex items-center gap-1">
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -199,19 +186,6 @@ function ImageUploader({
           </svg>
           {displayUrl ? "Choose Different" : "Choose Image"}
         </button>
-
-        {staged && !uploading && (
-          <button
-            type="button"
-            onClick={handleUpload}
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-full text-sm font-medium hover:bg-primary/90 transition-colors shadow-md"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-            </svg>
-            Upload Now
-          </button>
-        )}
       </div>
 
       {error && <p className="mt-2 text-red-500 text-xs">{error}</p>}
@@ -527,7 +501,7 @@ export default function AdminDashboard() {
                   </div>
                 )}
 
-                {activeTab === "problem" && (
+                {activeTab === "lifestyle" && (
                   <div className="space-y-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Headline</label>
@@ -805,6 +779,16 @@ export default function AdminDashboard() {
 
                 {activeTab === "settings" && (
                   <div className="space-y-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Announcement Banner Text</label>
+                      <input
+                        type="text"
+                        value={content.settings.marqueeText ?? ""}
+                        onChange={(e) => updateContent("settings", { ...content.settings, marqueeText: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      />
+                      <p className="text-xs text-gray-400 mt-1">This scrolls across the top of the hero section.</p>
+                    </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">WhatsApp Number</label>
                       <input

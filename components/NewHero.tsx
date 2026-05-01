@@ -30,7 +30,7 @@ export default function NewHero({ content }: NewHeroProps) {
   const { hero, settings } = content;
   const overlay = hero.overlayOpacity ?? 0.52;
   const badges = hero.trustBadges?.length ? hero.trustBadges : defaultTrustBadges;
-  const urgency = settings?.urgencyText ?? "Limited First Batch — Introductory Pricing Ends Soon";
+  const marquee = settings?.marqueeText ?? "First batch now available.  ·  Order yours today.";
 
   return (
     <section className="relative min-h-[100svh] flex flex-col overflow-hidden bg-[#0c1e3c]">
@@ -66,7 +66,7 @@ export default function NewHero({ content }: NewHeroProps) {
             .marquee-text { animation: marquee 18s linear infinite; display: inline-block; white-space: nowrap; }
           `}</style>
           <p className="marquee-text text-white/70 text-xs font-medium tracking-[0.18em] uppercase">
-            First batch now available.&nbsp;&nbsp;·&nbsp;&nbsp;Order yours today.&nbsp;&nbsp;·&nbsp;&nbsp;First batch now available.&nbsp;&nbsp;·&nbsp;&nbsp;Order yours today.
+            {marquee}&nbsp;&nbsp;·&nbsp;&nbsp;{marquee}
           </p>
         </div>
       </div>
