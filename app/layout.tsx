@@ -89,9 +89,6 @@ export const metadata: Metadata = {
     images: [OG_IMAGE],
   },
   manifest: "/manifest.json",
-  other: {
-    "theme-color": "#2E6EBB",
-  },
 };
 
 export default function RootLayout({
@@ -102,6 +99,7 @@ export default function RootLayout({
       <head>
         <meta name="theme-color" content="#2E6EBB" />
         <link rel="canonical" href={BASE_URL} />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </head>
       <body className="antialiased" suppressHydrationWarning>
         <Analytics />
