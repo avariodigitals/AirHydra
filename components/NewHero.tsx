@@ -52,18 +52,23 @@ export default function NewHero({ content }: NewHeroProps) {
         }}
       />
 
-      {/* Urgency banner */}
-      <div className="relative z-10 py-2.5 overflow-hidden">
-        <style>{`
-          @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-          }
-          .marquee-text { animation: marquee 18s linear infinite; display: inline-block; white-space: nowrap; }
-        `}</style>
-        <p className="marquee-text text-white text-xs font-medium tracking-[0.18em] uppercase">
-          First batch now available.&nbsp;&nbsp;·&nbsp;&nbsp;Order yours today.&nbsp;&nbsp;·&nbsp;&nbsp;First batch now available.&nbsp;&nbsp;·&nbsp;&nbsp;Order yours today.
-        </p>
+      {/* Logo + Urgency banner row */}
+      <div className="relative z-10 flex items-center justify-between px-5 lg:px-10 py-4 border-b border-white/10">
+        <span style={{ fontFamily: "var(--font-roboto)", fontWeight: 700, letterSpacing: "0.1em" }} className="text-white text-lg lg:text-xl select-none shrink-0">
+          AIRHYDRA
+        </span>
+        <div className="flex-1 overflow-hidden ml-8">
+          <style>{`
+            @keyframes marquee {
+              0% { transform: translateX(100%); }
+              100% { transform: translateX(-100%); }
+            }
+            .marquee-text { animation: marquee 18s linear infinite; display: inline-block; white-space: nowrap; }
+          `}</style>
+          <p className="marquee-text text-white/70 text-xs font-medium tracking-[0.18em] uppercase">
+            First batch now available.&nbsp;&nbsp;·&nbsp;&nbsp;Order yours today.&nbsp;&nbsp;·&nbsp;&nbsp;First batch now available.&nbsp;&nbsp;·&nbsp;&nbsp;Order yours today.
+          </p>
+        </div>
       </div>
 
       {/* Main content */}

@@ -51,14 +51,14 @@ function BenefitCard({ title, index }: { title: string; index: number }) {
   return (
     <div
       ref={ref}
-      className="group bg-cream-light border border-[#2E6EBB]/10 p-6 lg:p-8 rounded-2xl lg:rounded-3xl transition-all duration-500 hover:bg-cream hover:border-[#2E6EBB]/20 hover:-translate-y-1"
+      className="group bg-cream-light border border-[#2E6EBB]/15 p-6 lg:p-8 rounded-2xl lg:rounded-3xl shadow-card hover:shadow-card-hover hover:border-[#2E6EBB]/30 hover:-translate-y-1"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(20px)",
         transition: `opacity 0.5s ease ${index * 80}ms, transform 0.5s ease ${index * 80}ms, background-color 0.3s, border-color 0.3s, box-shadow 0.3s`,
       }}
     >
-      <div className="w-11 h-11 lg:w-13 lg:h-13 bg-[#2E6EBB]/10 rounded-xl flex items-center justify-center mb-5 text-[#2E6EBB] group-hover:bg-[#2E6EBB]/15 transition-colors duration-300">
+      <div className="w-11 h-11 lg:w-12 lg:h-12 bg-[#417BC1] rounded-xl flex items-center justify-center mb-5 text-white shadow-blue-glow-sm">
         {icons[index]}
       </div>
       <h3 className="text-base lg:text-lg font-serif text-[#1a1a1a] leading-snug">{title}</h3>
@@ -80,8 +80,7 @@ export default function BenefitsSection({ benefits }: { benefits: any }) {
       </div>
       <div className="container mx-auto px-5 lg:px-6">
         <div className="text-center mb-8 lg:mb-14">
-          <p className="text-[#2E6EBB] font-semibold tracking-[0.2em] uppercase text-xs mb-3">Why AirHydra</p>
-          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-serif mb-3 tracking-tight text-[#1a1a1a]">
+          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-serif mb-3 tracking-tight text-[#1a1a1a] relative inline-block after:block after:h-[3px] after:w-12 after:bg-[#417BC1] after:rounded-full after:mx-auto after:mt-3">
             {benefits.headline}
           </h2>
           <p className="text-base text-[#4b5563] max-w-xl mx-auto leading-relaxed">

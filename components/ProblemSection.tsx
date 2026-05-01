@@ -83,7 +83,7 @@ export default function ProblemSection({ problem }: { problem: any }) {
 
           {/* Heading */}
           <div className="text-center mb-8 lg:mb-12">
-            <p className="text-[#2E6EBB] font-medium tracking-[0.2em] uppercase text-xs mb-3">The Problem</p>
+            <span className="inline-block bg-[#2E6EBB]/10 text-[#2E6EBB] font-semibold tracking-[0.2em] uppercase text-xs px-3 py-1 rounded-full mb-4">The Problem</span>
             <h2 className="text-2xl sm:text-3xl lg:text-5xl font-serif mb-4 tracking-tight text-[#1a1a1a]">
               {problem.headline}
             </h2>
@@ -95,7 +95,7 @@ export default function ProblemSection({ problem }: { problem: any }) {
           {/* Problem cards */}
           <div className="grid md:grid-cols-2 gap-4 lg:gap-6 mb-6">
             {problem.problemPoints.map((point: any, i: number) => (
-              <div key={i} className="relative bg-white rounded-2xl lg:rounded-3xl overflow-hidden border border-[#2E6EBB]/8">
+              <div key={i} className="relative bg-white rounded-2xl lg:rounded-3xl overflow-hidden border border-[#2E6EBB]/15 shadow-card">
                 {/* Image — shown when uploaded */}
                 {point.image ? (
                   <div className="w-full aspect-[16/9] overflow-hidden">
@@ -107,7 +107,7 @@ export default function ProblemSection({ problem }: { problem: any }) {
                   </div>
                 )}
                 <div className="relative p-7 lg:p-8">
-                  <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-[#2E6EBB] rounded-r-full" />
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#417BC1]" />
                   <h3 className="text-xl lg:text-2xl font-serif mb-3 text-[#1a1a1a]">{point.title}</h3>
                   <p className="text-[#4b5563] leading-relaxed text-sm lg:text-base">{point.description}</p>
                 </div>
@@ -116,7 +116,7 @@ export default function ProblemSection({ problem }: { problem: any }) {
           </div>
 
           {/* Stats bar */}
-          <div className="grid gap-0 lg:grid-cols-3 rounded-2xl lg:rounded-3xl overflow-hidden border border-white/15 bg-[#3875BE]">
+          <div className="grid gap-0 lg:grid-cols-3 rounded-2xl lg:rounded-3xl overflow-hidden border border-white/15 bg-[#3875BE] shadow-blue-glow-sm" style={{boxShadow: "0 0 0 1px rgba(65,123,193,0.3), 0 8px 32px rgba(46,110,187,0.25)"}}>
             {stats.map((s, i) => (
               <div key={i} className={`${i > 0 ? "border-t lg:border-t-0 lg:border-l border-white/15" : ""}`}>
                 <StatCounter {...s} />

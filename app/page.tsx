@@ -36,7 +36,8 @@ export default async function Home() {
           <div className="text-center mb-10 lg:mb-16">
             <p className="text-primary font-medium tracking-[0.15em] uppercase text-xs mb-3">How It Works</p>
             <h2 className="text-2xl sm:text-3xl lg:text-5xl font-serif tracking-tight text-[#1a1a1a]">
-              {content.howItWorks.headline}
+              Three Steps to{" "}
+              <span className="text-[#417BC1]">Radiant Skin</span>
             </h2>
           </div>
 
@@ -196,9 +197,10 @@ export default async function Home() {
       <section className="py-14 lg:py-24 bg-cream-light">
         <div className="container mx-auto px-4 lg:px-6 max-w-2xl">
           <div className="text-center mb-10 lg:mb-14">
-            <p className="text-primary font-medium tracking-[0.15em] uppercase text-xs mb-3">FAQ</p>
+            <span className="inline-block bg-[#2E6EBB]/10 text-[#2E6EBB] font-semibold tracking-[0.2em] uppercase text-xs px-3 py-1 rounded-full mb-4">FAQ</span>
             <h2 className="text-2xl sm:text-3xl lg:text-5xl font-serif tracking-tight text-[#1a1a1a]">
-              {content.faqs.headline}
+              Everything You Need{" "}
+              <span className="text-[#417BC1]">to Know</span>
             </h2>
           </div>
           <FaqAccordion items={content.faqs.faqList} />
@@ -208,20 +210,41 @@ export default async function Home() {
       {/* ── FINAL CTA ────────────────────────────────────────────── */}
       <section className="py-14 lg:py-24 bg-primary relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.15),transparent_60%)]" />
-        <div className="container mx-auto px-4 lg:px-6 text-center relative z-10">
-          <h2 className="text-2xl sm:text-3xl lg:text-6xl font-serif mb-4 lg:mb-6 tracking-tight text-white">
-            {content.finalCta.headline}
-          </h2>
-          <p className="text-sm lg:text-lg text-white/70 mb-8 lg:mb-10 max-w-xl mx-auto leading-relaxed">
-            {content.finalCta.description}
-          </p>
-          <WhatsAppButton
-            text={content.finalCta.ctaText}
-            prefillMessage={content.finalCta.ctaPrefill}
-            variant="secondary"
-            className="w-full sm:w-auto"
-            trackingId="final_cta"
-          />
+        <div className="container mx-auto px-4 lg:px-6 relative z-10">
+
+          {/* Logo */}
+          <span style={{ fontFamily: "var(--font-roboto)", fontWeight: 900, letterSpacing: "0.06em" }} className="block text-white text-3xl sm:text-4xl lg:text-5xl select-none mb-10">
+            AIRHYDRA
+          </span>
+
+          {/* CTA content */}
+          <div className="text-center">
+            <h2 className="text-2xl sm:text-3xl lg:text-6xl font-serif mb-4 lg:mb-6 tracking-tight text-white">
+              {content.finalCta.headline}
+            </h2>
+            <p className="text-sm lg:text-lg text-white/70 mb-8 lg:mb-10 max-w-xl mx-auto leading-relaxed">
+              {content.finalCta.description}
+            </p>
+            <WhatsAppButton
+              text={content.finalCta.ctaText}
+              prefillMessage={content.finalCta.ctaPrefill}
+              variant="secondary"
+              className="w-full sm:w-auto"
+              trackingId="final_cta"
+            />
+          </div>
+
+          {/* Footer bottom bar */}
+          <div className="mt-14 pt-6 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <p className="text-white/40 text-xs tracking-wide">
+              &copy; {new Date().getFullYear()} AirHydra. All rights reserved.
+            </p>
+            <p className="text-white/30 text-xs tracking-wide">
+              Website designed &amp; developed by{" "}
+              <span className="text-white/60 font-medium">Avario Digitals</span>
+            </p>
+          </div>
+
         </div>
       </section>
 
