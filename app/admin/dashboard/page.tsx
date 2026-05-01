@@ -203,8 +203,6 @@ export default function AdminDashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    const isAuth = localStorage.getItem("adminAuth");
-    if (!isAuth) { router.push("/admin"); return; }
     loadContent();
   }, []);
 
@@ -230,10 +228,7 @@ export default function AdminDashboard() {
     try {
       const res = await fetch("/api/content", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_ADMIN_KEY}`,
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(content),
       });
       showToast(res.ok);
@@ -289,7 +284,10 @@ export default function AdminDashboard() {
             ))}
           </nav>
           <button
-            onClick={() => { localStorage.removeItem("adminAuth"); router.push("/admin"); }}
+            onClick={async () => {
+              await fetch("/api/admin-logout", { method: "POST" });
+              router.push("/admin");
+            }}
             className="w-full px-4 py-3 text-gray-500 hover:text-gray-800 text-left text-sm"
           >
             Logout

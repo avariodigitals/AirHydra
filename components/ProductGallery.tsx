@@ -17,23 +17,38 @@ interface ProductGalleryProps {
 
 export default function ProductGallery({ gallery }: ProductGalleryProps) {
   const { images } = gallery;
-  if (!images?.length) return null;
 
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const touchStart = useRef(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const pauseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const next = useCallback(() =>
     setActive((a) => (a === images.length - 1 ? 0 : a + 1)), [images.length]);
   const prev = () =>
     setActive((a) => (a === 0 ? images.length - 1 : a - 1));
 
+  const goTo = (i: number) => {
+    if (pauseTimerRef.current) clearTimeout(pauseTimerRef.current);
+    setActive(i);
+    setPaused(true);
+    pauseTimerRef.current = setTimeout(() => setPaused(false), 5000);
+  };
+
   useEffect(() => {
     if (paused) return;
     intervalRef.current = setInterval(next, 4000);
     return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
   }, [paused, next]);
+
+  useEffect(() => {
+    return () => {
+      if (pauseTimerRef.current) clearTimeout(pauseTimerRef.current);
+    };
+  }, []);
+
+  if (!images?.length) return null;
 
   return (
     <section className="py-14 lg:py-24 bg-cream-light">
@@ -94,7 +109,6 @@ export default function ProductGallery({ gallery }: ProductGalleryProps) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
-
           </div>
 
           {/* Thumbnails */}
@@ -102,7 +116,7 @@ export default function ProductGallery({ gallery }: ProductGalleryProps) {
             {images.map((img, i) => (
               <button
                 key={i}
-                onClick={() => { setActive(i); setPaused(true); setTimeout(() => setPaused(false), 5000); }}
+                onClick={() => goTo(i)}
                 aria-label={`View image ${i + 1}`}
                 className={`rounded-2xl overflow-hidden border-2 transition-all duration-200 aspect-square w-20 shrink-0 ${
                   i === active ? "border-[#417BC1] shadow-blue-glow-sm" : "border-transparent opacity-60 hover:opacity-90"
@@ -118,7 +132,7 @@ export default function ProductGallery({ gallery }: ProductGalleryProps) {
             {images.map((_, i) => (
               <button
                 key={i}
-                onClick={() => { setActive(i); setPaused(true); setTimeout(() => setPaused(false), 5000); }}
+                onClick={() => goTo(i)}
                 aria-label={`Go to image ${i + 1}`}
                 className={`rounded-full transition-all duration-300 ${
                   i === active ? "w-6 h-2 bg-[#417BC1]" : "w-2 h-2 bg-[#2E6EBB]/25 hover:bg-[#2E6EBB]/50"

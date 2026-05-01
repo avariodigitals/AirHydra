@@ -6,9 +6,10 @@ interface WhatsAppButtonProps {
   className?: string;
   variant?: "primary" | "secondary";
   trackingId?: string;
+  whatsappNumber?: string;
 }
 
-const WHATSAPP_NUMBER = "2347072387362";
+const DEFAULT_WHATSAPP = "2347072387362";
 
 export default function WhatsAppButton({
   text,
@@ -16,8 +17,10 @@ export default function WhatsAppButton({
   className = "",
   variant = "primary",
   trackingId,
+  whatsappNumber,
 }: WhatsAppButtonProps) {
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(prefillMessage)}`;
+  const number = (whatsappNumber ?? DEFAULT_WHATSAPP).replace(/\D/g, "");
+  const whatsappUrl = `https://wa.me/${number}?text=${encodeURIComponent(prefillMessage)}`;
 
   const handleClick = () => {
     if (typeof window === "undefined") return;

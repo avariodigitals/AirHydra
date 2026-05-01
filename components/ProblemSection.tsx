@@ -29,6 +29,7 @@ function StatCounter({ value, suffix, label }: { value: number; suffix: string; 
             if (current >= value) { setCount(value); clearInterval(timer); }
             else { setCount(Math.floor(current)); }
           }, duration / steps);
+          return () => clearInterval(timer);
         }
       },
       { threshold: 0.4 }

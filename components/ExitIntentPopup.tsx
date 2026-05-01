@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import WhatsAppButton from "./WhatsAppButton";
 
-export default function ExitIntentPopup() {
+export default function ExitIntentPopup({ whatsappNumber }: { whatsappNumber?: string }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -78,6 +78,7 @@ export default function ExitIntentPopup() {
           prefillMessage="Hi AirHydra, I want to order before the launch pricing ends"
           className="w-full py-4 text-base font-semibold"
           trackingId="exit_intent"
+          whatsappNumber={whatsappNumber}
         />
 
         <button

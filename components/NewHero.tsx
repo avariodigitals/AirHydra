@@ -15,6 +15,8 @@ interface NewHeroProps {
     };
     settings?: {
       urgencyText?: string;
+      marqueeText?: string;
+      whatsappNumber?: string;
     };
   };
 }
@@ -58,13 +60,6 @@ export default function NewHero({ content }: NewHeroProps) {
           AIRHYDRA
         </span>
         <div className="flex-1 overflow-hidden ml-8">
-          <style>{`
-            @keyframes marquee {
-              0% { transform: translateX(100%); }
-              100% { transform: translateX(-100%); }
-            }
-            .marquee-text { animation: marquee 18s linear infinite; display: inline-block; white-space: nowrap; }
-          `}</style>
           <p className="marquee-text text-white/70 text-xs font-medium tracking-[0.18em] uppercase">
             {marquee}&nbsp;&nbsp;·&nbsp;&nbsp;{marquee}
           </p>
@@ -93,6 +88,7 @@ export default function NewHero({ content }: NewHeroProps) {
                   prefillMessage={hero.primaryCtaPrefill}
                   className="w-full sm:w-auto px-8 py-4 text-base font-semibold tracking-wide shadow-[0_20px_50px_rgba(46,110,187,0.4)]"
                   trackingId="hero_primary"
+                  whatsappNumber={settings?.whatsappNumber}
                 />
                 {hero.secondaryCtaText && (
                   <a

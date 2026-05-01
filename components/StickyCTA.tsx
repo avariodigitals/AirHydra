@@ -7,9 +7,7 @@ export default function StickyCTA() {
 
   useEffect(() => {
     const onScroll = () => {
-      const y = window.scrollY;
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      setPast60(y > 60);
+      setPast60(window.scrollY > 60);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);

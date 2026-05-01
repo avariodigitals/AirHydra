@@ -40,7 +40,7 @@ export default async function Home() {
             "aggregateRating": {
               "@type": "AggregateRating",
               "ratingValue": "5",
-              "reviewCount": "3",
+              "reviewCount": String(content.testimonials.testimonialsList.length),
               "bestRating": "5",
               "worstRating": "1"
             },
@@ -158,6 +158,7 @@ export default async function Home() {
                 prefillMessage={content.lifestyle.ctaPrefill}
                 className="w-full sm:w-auto"
                 trackingId="lifestyle"
+                whatsappNumber={content.settings.whatsappNumber}
               />
             </div>
 
@@ -240,6 +241,7 @@ export default async function Home() {
                     variant="secondary"
                     className="w-full"
                     trackingId={`store_${i}`}
+                    whatsappNumber={content.settings.whatsappNumber}
                   />
                   {store.mapsLink && (
                     <a href={store.mapsLink} target="_blank" rel="noopener noreferrer"
@@ -296,6 +298,7 @@ export default async function Home() {
               variant="secondary"
               className="w-full sm:w-auto"
               trackingId="final_cta"
+              whatsappNumber={content.settings.whatsappNumber}
             />
           </div>
 
@@ -316,7 +319,7 @@ export default async function Home() {
       <div className="h-20 md:hidden" />
 
       <StickyCTA />
-      <ExitIntentPopup />
+      <ExitIntentPopup whatsappNumber={content.settings.whatsappNumber} />
     </main>
   );
 }

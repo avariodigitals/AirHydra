@@ -15,8 +15,8 @@ const config: Config = {
         "cream-dark": "#F2EDE4",
       },
       fontFamily: {
-        serif: ["'Playfair Display'", "Georgia", "'Times New Roman'", "serif"],
-        sans: ["'Inter'", "system-ui", "-apple-system", "sans-serif"],
+        serif: ["var(--font-playfair)", "Georgia", "'Times New Roman'", "serif"],
+        sans: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
         onest: ["var(--font-onest)", "sans-serif"],
         "space-grotesk": ["var(--font-space-grotesk)", "sans-serif"],
       },
