@@ -17,6 +17,27 @@
     "heroImageFileId": "69f49a3e5c7cd75eb8d9f604",
     "productImageFileId": "69f49a555c7cd75eb8da6cda"
   },
+  "productGallery": {
+    "headline": "The Product",
+    "subheadline": "Premium in-flight hydration, beautifully crafted.",
+    "images": [
+      {
+        "url": "https://ik.imagekit.io/360t0n1jd9/airhydra/IMG_7791.PNG",
+        "alt": "AirHydra In-Flight Hydrating Gel — Front View",
+        "fileId": ""
+      },
+      {
+        "url": "https://ik.imagekit.io/360t0n1jd9/airhydra/IMG_7789.PNG",
+        "alt": "AirHydra In-Flight Hydrating Gel — Side View",
+        "fileId": ""
+      },
+      {
+        "url": "https://ik.imagekit.io/360t0n1jd9/airhydra/Airhydra%201.PNG",
+        "alt": "AirHydra In-Flight Hydrating Gel — Detail",
+        "fileId": ""
+      }
+    ]
+  },
   "problem": {
     "headline": "Cabin Air Is Destroying Your Skin",
     "description": "Aircraft cabins have humidity levels as low as 10% — far below the 40–60% your skin needs. Every long-haul flight leaves you dehydrated, puffy, and dull.",
@@ -28,7 +49,7 @@
         "imageFileId": "69f4a33d5c7cd75eb816e429"
       },
       {
-        "title": "Puffiness & Fatigue",
+        "title": "Puffiness and Fatigue",
         "description": "Recirculated air and pressure changes cause inflammation and visible tiredness.",
         "image": "https://ik.imagekit.io/360t0n1jd9/airhydra/problem/bhakti-parab-mtaVk-h7lgk-unsplash_IMPIOPI9d.jpg",
         "imageFileId": "69f4a6565c7cd75eb830015c"

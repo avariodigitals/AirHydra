@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 type Content = {
   hero: any;
+  productGallery: any;
   problem: any;
   benefits: any;
   howItWorks: any;
@@ -274,6 +275,7 @@ export default function AdminDashboard() {
 
   const tabs = [
     { id: "hero", label: "Hero" },
+    { id: "productGallery", label: "Product Gallery" },
     { id: "problem", label: "Problem" },
     { id: "lifestyle", label: "Lifestyle" },
     { id: "benefits", label: "Benefits" },
@@ -400,6 +402,84 @@ export default function AdminDashboard() {
                   </div>
                 )}
 
+                {activeTab === "productGallery" && (
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Section Headline</label>
+                      <input
+                        type="text"
+                        value={content.productGallery?.headline ?? ""}
+                        onChange={(e) => updateContent("productGallery", { ...content.productGallery, headline: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Subheadline</label>
+                      <input
+                        type="text"
+                        value={content.productGallery?.subheadline ?? ""}
+                        onChange={(e) => updateContent("productGallery", { ...content.productGallery, subheadline: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      />
+                    </div>
+                    <p className="text-xs text-gray-400">Up to 3 images shows a grid. 4 or more switches to a carousel automatically.</p>
+                    {(content.productGallery?.images ?? []).map((img: any, index: number) => (
+                      <div key={index} className="border border-gray-200 p-6 rounded-2xl space-y-4">
+                        <div className="flex items-center justify-between">
+                          <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest">Image {index + 1}</p>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newImages = content.productGallery.images.filter((_: any, i: number) => i !== index);
+                              updateContent("productGallery", { ...content.productGallery, images: newImages });
+                            }}
+                            className="text-xs text-red-400 hover:text-red-600 transition-colors"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Alt Text</label>
+                          <input
+                            type="text"
+                            value={img.alt}
+                            onChange={(e) => {
+                              const newImages = [...content.productGallery.images];
+                              newImages[index] = { ...newImages[index], alt: e.target.value };
+                              updateContent("productGallery", { ...content.productGallery, images: newImages });
+                            }}
+                            className="w-full px-4 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary/50"
+                          />
+                        </div>
+                        <ImageUploader
+                          label="Product Image"
+                          currentUrl={img.url}
+                          currentFileId={img.fileId}
+                          folder="/airhydra/gallery"
+                          onUploaded={({ url, fileId }) => {
+                            const newImages = [...content.productGallery.images];
+                            newImages[index] = { ...newImages[index], url, fileId: fileId ?? img.fileId };
+                            updateContent("productGallery", { ...content.productGallery, images: newImages });
+                          }}
+                        />
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const newImages = [...(content.productGallery?.images ?? []), { url: "", alt: "AirHydra Product", fileId: "" }];
+                        updateContent("productGallery", { ...content.productGallery, images: newImages });
+                      }}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 border border-dashed border-primary/40 rounded-full text-sm font-medium text-primary hover:bg-primary/5 transition-colors"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                      </svg>
+                      Add Image
+                    </button>
+                  </div>
+                )}
+
                 {activeTab === "problem" && (
                   <div className="space-y-6">
                     {content.problem.problemPoints.map((point: any, index: number) => (
@@ -447,7 +527,7 @@ export default function AdminDashboard() {
                   </div>
                 )}
 
-                {activeTab === "lifestyle" && (
+                {activeTab === "problem" && (
                   <div className="space-y-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Headline</label>

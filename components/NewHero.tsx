@@ -129,11 +129,11 @@ export default function NewHero({ content }: NewHeroProps) {
                   <img
                     src={hero.productImage}
                     alt="AirHydra In-Flight Hydrating Gel"
-                    className="relative w-64 sm:w-80 lg:w-96 h-auto object-contain drop-shadow-2xl"
+                    className="relative w-72 sm:w-[26rem] lg:w-[28rem] xl:w-[32rem] h-auto object-contain drop-shadow-2xl"
                   />
                 </div>
               ) : (
-                <div className="w-64 sm:w-80 lg:w-96 aspect-[3/4] rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center">
+                <div className="w-72 sm:w-[26rem] lg:w-[36rem] aspect-[3/4] rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center">
                   <p className="text-white/30 text-sm">Product Image</p>
                 </div>
               )}

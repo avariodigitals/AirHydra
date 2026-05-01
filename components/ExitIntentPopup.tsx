@@ -5,32 +5,33 @@ import WhatsAppButton from "./WhatsAppButton";
 
 export default function ExitIntentPopup() {
   const [visible, setVisible] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
-    if (dismissed) return;
+    if (sessionStorage.getItem("exit_popup_seen")) return;
 
-    const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0 && !dismissed) {
-        setVisible(true);
-      }
+    const show = () => {
+      if (sessionStorage.getItem("exit_popup_seen")) return;
+      setVisible(true);
     };
 
-    // Mobile: show after 60s of inactivity
-    const timer = setTimeout(() => {
-      if (!dismissed) setVisible(true);
-    }, 60000);
+    // Desktop: exit-intent (mouse leaves top of viewport)
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0) show();
+    };
+
+    // Mobile / fallback: show after 10s
+    const timer = setTimeout(show, 10000);
 
     document.addEventListener("mouseleave", handleMouseLeave);
     return () => {
       document.removeEventListener("mouseleave", handleMouseLeave);
       clearTimeout(timer);
     };
-  }, [dismissed]);
+  }, []);
 
   const dismiss = () => {
+    sessionStorage.setItem("exit_popup_seen", "1");
     setVisible(false);
-    setDismissed(true);
   };
 
   if (!visible) return null;

@@ -5,6 +5,7 @@ import BenefitsSection from "@/components/BenefitsSection";
 import FaqAccordion from "@/components/FaqAccordion";
 import StickyCTA from "@/components/StickyCTA";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
+import ProductGallery from "@/components/ProductGallery";
 import { getContent } from "@/lib/content";
 
 export default async function Home() {
@@ -83,6 +84,9 @@ export default async function Home() {
       />
 
       <NewHero content={content} />
+
+      {/* ── PRODUCT GALLERY ──────────────────────────────────────── */}
+      <ProductGallery gallery={content.productGallery} />
 
       {/* ── PROBLEM ──────────────────────────────────────────────── */}
       <ProblemSection problem={content.problem} />
