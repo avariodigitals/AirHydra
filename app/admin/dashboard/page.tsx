@@ -199,6 +199,7 @@ export default function AdminDashboard() {
   const [content, setContent] = useState<Content | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [toast, setToast] = useState<{ show: boolean; success: boolean }>({ show: false, success: true });
   const router = useRouter();
 
@@ -262,58 +263,104 @@ export default function AdminDashboard() {
     );
   }
 
+  const SidebarContent = ({ onSelect }: { onSelect?: () => void }) => (
+    <>
+      <h1 className="text-2xl font-serif mb-8">AirHydra Admin</h1>
+      <nav className="space-y-2 flex-1">
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => { setActiveTab(tab.id); onSelect?.(); }}
+            className={`w-full text-left px-4 py-3 rounded-full text-sm transition-colors ${
+              activeTab === tab.id ? "bg-primary text-white" : "text-gray-700 hover:bg-cream"
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </nav>
+      <button
+        onClick={async () => {
+          await fetch("/api/admin-logout", { method: "POST" });
+          router.push("/admin");
+        }}
+        className="w-full px-4 py-3 text-gray-500 hover:text-gray-800 text-left text-sm"
+      >
+        Logout
+      </button>
+    </>
+  );
+
   return (
     <div className="min-h-screen bg-cream">
       <Toast show={toast.show} success={toast.success} />
 
+      {/* Mobile drawer overlay */}
+      {sidebarOpen && (
+        <div
+          className="lg:hidden fixed inset-0 z-40 bg-black/40"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Mobile drawer */}
+      <div className={`lg:hidden fixed top-0 left-0 h-full w-64 bg-white z-50 p-6 flex flex-col shadow-2xl transition-transform duration-300 ${
+        sidebarOpen ? "translate-x-0" : "-translate-x-full"
+      }`}>
+        <SidebarContent onSelect={() => setSidebarOpen(false)} />
+      </div>
+
       <div className="flex min-h-screen">
-        {/* Sidebar */}
-        <div className="w-64 bg-white border-r border-gray-200 p-6 flex flex-col">
-          <h1 className="text-2xl font-serif mb-8">AirHydra Admin</h1>
-          <nav className="space-y-2 flex-1">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`w-full text-left px-4 py-3 rounded-full text-sm transition-colors ${
-                  activeTab === tab.id ? "bg-primary text-white" : "text-gray-700 hover:bg-cream"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </nav>
-          <button
-            onClick={async () => {
-              await fetch("/api/admin-logout", { method: "POST" });
-              router.push("/admin");
-            }}
-            className="w-full px-4 py-3 text-gray-500 hover:text-gray-800 text-left text-sm"
-          >
-            Logout
-          </button>
+        {/* Desktop sidebar */}
+        <div className="hidden lg:flex w-64 bg-white border-r border-gray-200 p-6 flex-col shrink-0">
+          <SidebarContent />
         </div>
 
         {/* Main */}
-        <div className="flex-1 p-8">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-serif capitalize">{activeTab}</h2>
+        <div className="flex-1 min-w-0 flex flex-col">
+          {/* Mobile top bar */}
+          <div className="lg:hidden flex items-center justify-between px-4 py-4 bg-white border-b border-gray-200 sticky top-0 z-30">
+            <button onClick={() => setSidebarOpen(true)} className="p-2 -ml-2 text-gray-700">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            <h1 className="text-lg font-serif">AirHydra Admin</h1>
             <button
               onClick={saveContent}
               disabled={saving}
-              className="bg-primary text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 flex items-center gap-2"
+              className="bg-primary text-white px-5 py-2 rounded-full text-sm font-medium disabled:opacity-50 flex items-center gap-1.5"
             >
               {saving && (
-                <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                <svg className="w-3.5 h-3.5 animate-spin" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                 </svg>
               )}
-              {saving ? "Saving…" : "Save Changes"}
+              {saving ? "Saving…" : "Save"}
             </button>
           </div>
 
-          <div className="bg-white p-8 rounded-3xl shadow-sm">
+          <div className="flex-1 p-4 lg:p-8">
+            {/* Desktop header */}
+            <div className="hidden lg:flex justify-between items-center mb-8">
+              <h2 className="text-3xl font-serif capitalize">{activeTab}</h2>
+              <button
+                onClick={saveContent}
+                disabled={saving}
+                className="bg-primary text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 flex items-center gap-2"
+              >
+                {saving && (
+                  <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                  </svg>
+                )}
+                {saving ? "Saving…" : "Save Changes"}
+              </button>
+            </div>
+
+          <div className="bg-white p-4 lg:p-8 rounded-3xl shadow-sm">
             {content && (
               <>
                 {activeTab === "hero" && (
@@ -589,7 +636,7 @@ export default function AdminDashboard() {
                   <div className="space-y-4">
                     {content.testimonials.testimonialsList.map((testimonial: any, index: number) => (
                       <div key={index} className="border border-gray-200 p-6 rounded-2xl">
-                        <div className="grid grid-cols-2 gap-4 mb-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
                             <input
@@ -809,6 +856,7 @@ export default function AdminDashboard() {
                 )}
               </>
             )}
+          </div>
           </div>
         </div>
       </div>
