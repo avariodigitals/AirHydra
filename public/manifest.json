@@ -1,0 +1,18 @@
+{
+  "name": "AirHydra — Glow All Flight Long",
+  "short_name": "AirHydra",
+  "description": "Premium In-Flight Hydrating Gel. Keep your skin fresh, dewy and radiant at altitude.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c1e3c",
+  "theme_color": "#2E6EBB",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

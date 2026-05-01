@@ -21,7 +21,67 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-cream text-[#2E6EBB]">
 
-      {/* ── HERO ─────────────────────────────────────────────────── */}
+      {/* ── JSON-LD Structured Data ───────────────────────────────── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([
+          {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "AirHydra In-Flight Hydrating Gel",
+            "description": "Premium in-flight hydrating gel designed to keep your skin fresh, dewy and radiant at altitude. Dermatologist-safe and TSA cabin-friendly.",
+            "brand": { "@type": "Brand", "name": "AirHydra" },
+            "image": "https://ik.imagekit.io/360t0n1jd9/airhydra/product/IMG_7789-removebg-preview_AnXmZSqx1.png",
+            "url": "https://airhydra.com",
+            "category": "Skincare / Travel Beauty",
+            "audience": { "@type": "Audience", "audienceType": "Frequent Flyers, Travellers" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "5",
+              "reviewCount": "3",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "review": content.testimonials.testimonialsList.map((r: any) => ({
+              "@type": "Review",
+              "author": { "@type": "Person", "name": r.name },
+              "reviewRating": { "@type": "Rating", "ratingValue": r.rating, "bestRating": "5" },
+              "reviewBody": r.text,
+            })),
+            "offers": {
+              "@type": "Offer",
+              "availability": "https://schema.org/InStock",
+              "priceCurrency": "NGN",
+              "seller": { "@type": "Organization", "name": "AirHydra" },
+              "url": "https://airhydra.com",
+            },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "AirHydra",
+            "url": "https://airhydra.com",
+            "logo": "https://ik.imagekit.io/360t0n1jd9/airhydra/Airhydra%20DP%20Logo%20White.png",
+            "description": "AirHydra makes premium in-flight skincare for frequent travellers.",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+2347072387362",
+              "contactType": "customer service",
+              "availableLanguage": "English",
+            },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": content.faqs.faqList.map((faq: any) => ({
+              "@type": "Question",
+              "name": faq.question,
+              "acceptedAnswer": { "@type": "Answer", "text": faq.answer },
+            })),
+          },
+        ]) }}
+      />
+
       <NewHero content={content} />
 
       {/* ── PROBLEM ──────────────────────────────────────────────── */}
@@ -241,7 +301,7 @@ export default async function Home() {
             </p>
             <p className="text-white/30 text-xs tracking-wide">
               Website designed &amp; developed by{" "}
-              <span className="text-white/60 font-medium">Avario Digitals</span>
+              <a href="https://www.avariodigitals.com" target="_blank" rel="noopener noreferrer" className="text-white/60 font-medium hover:text-white transition-colors duration-200">Avario Digitals</a>
             </p>
           </div>
 
