@@ -497,38 +497,39 @@ export default function AdminDashboard() {
 
                 {activeTab === "benefits" && (
                   <div className="space-y-4">
-                    {content.benefits.benefitsList.map((benefit: any, index: number) => (
-                      <div key={index} className="border border-gray-200 p-6 rounded-2xl">
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
+                    <p className="text-sm text-gray-500 mb-2">Icons are fixed — only the title text is editable.</p>
+                    {content.benefits.benefitsList.map((benefit: any, index: number) => {
+                      const svgPaths = [
+                        <><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 2C8 7 5 11.5 5 14.5a7 7 0 0014 0C19 11.5 16 7 12 2z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 18a3.5 3.5 0 01-3.5-3.5" /></>,
+                        <><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></>,
+                        <><circle cx="12" cy="12" r="4" strokeWidth={1.5} /><path strokeLinecap="round" strokeWidth={1.5} d="M12 2v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" /></>,
+                        <><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></>,
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />,
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />,
+                      ];
+                      return (
+                        <div key={index} className="border border-gray-200 p-5 rounded-2xl flex items-center gap-5">
+                          <div className="w-12 h-12 bg-[#2E6EBB]/10 rounded-xl flex items-center justify-center shrink-0 text-[#2E6EBB]">
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              {svgPaths[index]}
+                            </svg>
+                          </div>
+                          <div className="flex-1">
+                            <label className="block text-xs font-medium text-gray-500 mb-1.5">Title</label>
                             <input
                               type="text"
                               value={benefit.title}
                               onChange={(e) => {
                                 const newList = [...content.benefits.benefitsList];
-                                newList[index].title = e.target.value;
+                                newList[index] = { ...newList[index], title: e.target.value };
                                 updateContent("benefits", { ...content.benefits, benefitsList: newList });
                               }}
-                              className="w-full px-4 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary/50"
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Icon</label>
-                            <input
-                              type="text"
-                              value={benefit.icon}
-                              onChange={(e) => {
-                                const newList = [...content.benefits.benefitsList];
-                                newList[index].icon = e.target.value;
-                                updateContent("benefits", { ...content.benefits, benefitsList: newList });
-                              }}
-                              className="w-full px-4 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary/50"
+                              className="w-full px-4 py-2.5 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
                             />
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 )}
 

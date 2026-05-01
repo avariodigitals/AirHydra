@@ -71,15 +71,10 @@ export default function BenefitsSection({ benefits }: { benefits: any }) {
     <section className="py-14 lg:py-24 relative overflow-hidden bg-white">      
       {/* Atmospheric background */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Base gradient — white fading to a very light sky blue */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_50%_-10%,rgba(56,117,190,0.12),transparent_60%)]" />
-        {/* Bottom atmospheric wash */}
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-[radial-gradient(ellipse_100%_60%_at_50%_100%,rgba(56,117,190,0.07),transparent_70%)]" />
-        {/* Left cloud orb */}
         <div className="absolute -left-32 top-1/4 w-[500px] h-[500px] rounded-full bg-[#3875BE]/[0.06] blur-[80px]" />
-        {/* Right cloud orb */}
         <div className="absolute -right-32 bottom-1/4 w-[400px] h-[400px] rounded-full bg-[#3875BE]/[0.05] blur-[80px]" />
-        {/* Subtle horizontal streak — like light through a cabin window */}
         <div className="absolute top-[38%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#3875BE]/20 to-transparent" />
         <div className="absolute top-[42%] left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-[#3875BE]/10 to-transparent" />
       </div>

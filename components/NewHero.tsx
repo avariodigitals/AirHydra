@@ -53,9 +53,16 @@ export default function NewHero({ content }: NewHeroProps) {
       />
 
       {/* Urgency banner */}
-      <div className="relative z-10 bg-[#2E6EBB] py-2.5 px-4 text-center">
-        <p className="text-white text-xs font-medium tracking-[0.12em]">
-          {urgency}
+      <div className="relative z-10 py-2.5 overflow-hidden">
+        <style>{`
+          @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+          }
+          .marquee-text { animation: marquee 18s linear infinite; display: inline-block; white-space: nowrap; }
+        `}</style>
+        <p className="marquee-text text-white text-xs font-medium tracking-[0.18em] uppercase">
+          First batch now available.&nbsp;&nbsp;·&nbsp;&nbsp;Order yours today.&nbsp;&nbsp;·&nbsp;&nbsp;First batch now available.&nbsp;&nbsp;·&nbsp;&nbsp;Order yours today.
         </p>
       </div>
 
