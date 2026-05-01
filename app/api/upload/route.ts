@@ -68,6 +68,7 @@ export async function DELETE(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const formData = await request.formData();
     const file = formData.get("file") as File;
     const folder = (formData.get("folder") as string) || "/airhydra";
     const previousUrl = (formData.get("previousUrl") as string) || "";
