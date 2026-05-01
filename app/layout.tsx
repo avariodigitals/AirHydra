@@ -95,7 +95,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${onest.variable} ${spaceGrotesk.variable} ${roboto.variable}`}>
+    <html lang="en" className={`${onest.variable} ${spaceGrotesk.variable} ${roboto.variable}`} suppressHydrationWarning>
       <head>
         <meta name="theme-color" content="#2E6EBB" />
         <link rel="canonical" href={BASE_URL} />

@@ -6,6 +6,7 @@ import FaqAccordion from "@/components/FaqAccordion";
 import StickyCTA from "@/components/StickyCTA";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import ProductGallery from "@/components/ProductGallery";
+import CurrentYear from "@/components/CurrentYear";
 import { getContent } from "@/lib/content";
 
 export default async function Home() {
@@ -20,7 +21,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-cream text-[#2E6EBB]">
+    <main className="min-h-screen bg-cream text-[#2E6EBB]" suppressHydrationWarning>
 
       {/* ── JSON-LD Structured Data ───────────────────────────────── */}
       <script
@@ -301,7 +302,7 @@ export default async function Home() {
           {/* Footer bottom bar */}
           <div className="mt-14 pt-6 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-2">
             <p className="text-white/40 text-xs tracking-wide">
-              &copy; {new Date().getFullYear()} AirHydra. All rights reserved.
+              &copy; <CurrentYear /> AirHydra. All rights reserved.
             </p>
             <p className="text-white/30 text-xs tracking-wide">
               Website designed &amp; developed by{" "}
