@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 
 const stats = [
-  { value: 10, suffix: "%", label: "Avg. cabin humidity" },
-  { value: 40, suffix: "%", label: "Moisture lost per flight" },
-  { value: 3, suffix: "hrs", label: "Until skin feels tight" },
+  { value: 10, suffix: "%", label: "Average Cabin Humidity" },
+{ value: 25, suffix: "%", label: "Moisture lost during long flight" },
+  { value: 3, suffix: "hrs", label: "Skin Begins To Feel Tight" },
 ];
 
 function StatCounter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
@@ -83,7 +83,7 @@ export default function ProblemSection({ problem }: { problem: any }) {
 
           {/* Heading */}
           <div className="text-center mb-8 lg:mb-12">
-            <span className="inline-block bg-[#2E6EBB]/10 text-[#2E6EBB] font-semibold tracking-[0.2em] uppercase text-xs px-3 py-1 rounded-full mb-4">The Problem</span>
+            <span className="inline-block bg-[#2E6EBB]/10 text-[#2E6EBB] font-semibold tracking-[0.2em] uppercase text-xs px-3 py-1 rounded-full mb-4">THE FLIGHT EFFECT </span>
             <h2 className="text-2xl sm:text-3xl lg:text-5xl font-serif mb-4 tracking-tight text-[#1a1a1a]">
               {problem.headline}
             </h2>

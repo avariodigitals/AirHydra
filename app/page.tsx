@@ -2,10 +2,11 @@ import NewHero from "@/components/NewHero";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ProblemSection from "@/components/ProblemSection";
 import BenefitsSection from "@/components/BenefitsSection";
+import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import FaqAccordion from "@/components/FaqAccordion";
 import StickyCTA from "@/components/StickyCTA";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
-import ProductGallery from "@/components/ProductGallery";
+import Productlay from "@/components/productlay";
 import { getContent } from "@/lib/content";
 
 export default async function Home() {
@@ -85,15 +86,11 @@ export default async function Home() {
 
       <NewHero content={content} />
 
-      {/* ── PRODUCT GALLERY ──────────────────────────────────────── */}
-      <ProductGallery gallery={content.productGallery} />
-
-      {/* ── PROBLEM ──────────────────────────────────────────────── */}
+       {/* ── PROBLEM ──────────────────────────────────────────────── */}
       <ProblemSection problem={content.problem} />
 
-      {/* ── BENEFITS ─────────────────────────────────────────────── */}
-      <BenefitsSection benefits={content.benefits} />
-
+      {/* ── PRODUCT LAY ──────────────────────────────────────── */}
+      <Productlay />
       {/* ── HOW IT WORKS ─────────────────────────────────────────── */}
       <section className="py-14 lg:py-24 bg-cream-light">
         <div className="container mx-auto px-4 lg:px-6">
@@ -132,6 +129,38 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── BEFORE & AFTER ───────────────────────────────────────── */}
+      <section className="py-14 lg:py-24 bg-gradient-to-br from-cream via-white to-cream-light relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(46,110,187,0.03),transparent_70%)]" />
+        <div className="container mx-auto px-4 lg:px-6 relative z-10">
+          <div className="text-center mb-10 lg:mb-16">
+            <p className="text-primary font-medium tracking-[0.15em] uppercase text-xs mb-3">Real Results</p>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-serif tracking-tight text-[#1a1a1a]">
+              See the{" "}
+              <span className="text-[#417BC1]">Transformation</span>
+            </h2>
+            <p className="text-sm lg:text-base text-[#4b5563] mt-4 max-w-2xl mx-auto leading-relaxed">
+              {content.beforeAfter.description}
+            </p>
+          </div>
+
+          <div className="max-w-screen-xl mx-auto">
+            <BeforeAfterSlider
+              beforeImage={content.beforeAfter.beforeImage}
+              afterImage={content.beforeAfter.afterImage}
+              beforeLabel={content.beforeAfter.beforeLabel}
+              afterLabel={content.beforeAfter.afterLabel}
+            />
+          </div>
+        </div>
+      </section>
+
+     
+
+      {/* ── BENEFITS ─────────────────────────────────────────────── */}
+      <BenefitsSection benefits={content.benefits} />
+
 
       {/* ── LIFESTYLE ────────────────────────────────────────────── */}
       <section className="py-14 lg:py-24 bg-white">
@@ -277,9 +306,11 @@ export default async function Home() {
         <div className="container mx-auto px-4 lg:px-6 relative z-10">
 
           {/* Logo */}
-          <span style={{ fontFamily: "var(--font-roboto)", fontWeight: 900, letterSpacing: "0.06em" }} className="block text-white text-3xl sm:text-4xl lg:text-5xl select-none mb-10">
-            AIRHYDRA
-          </span>
+          <div className="flex justify-center mb-10">
+            <span style={{ fontFamily: "var(--font-roboto)", fontWeight: 900, letterSpacing: "0.06em" }} className="text-white text-2xl sm:text-3xl lg:text-4xl select-none tracking-[0.18em]">
+              AIRHYDRA
+            </span>
+          </div>
 
           {/* CTA content */}
           <div className="text-center">

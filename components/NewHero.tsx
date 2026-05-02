@@ -66,7 +66,7 @@ export default function NewHero({ content }: NewHeroProps) {
             .marquee-text { animation: marquee 18s linear infinite; display: inline-block; white-space: nowrap; }
           `}</style>
           <p className="marquee-text text-white/70 text-xs font-medium tracking-[0.18em] uppercase">
-            First batch now available.&nbsp;&nbsp;·&nbsp;&nbsp;Order yours today.&nbsp;&nbsp;·&nbsp;&nbsp;First batch now available.&nbsp;&nbsp;·&nbsp;&nbsp;Order yours today.
+            Now selling premium In-Flight Hydrating Gel.&nbsp;&nbsp;·&nbsp;&nbsp;Order yours today.&nbsp;&nbsp;·&nbsp;&nbsp;Now selling premium In-Flight Hydrating Gel.&nbsp;&nbsp;·&nbsp;&nbsp;Order yours today.
           </p>
         </div>
       </div>
@@ -74,12 +74,17 @@ export default function NewHero({ content }: NewHeroProps) {
       {/* Main content */}
       <div className="relative z-10 flex-1 flex items-center">
         <div className="container mx-auto px-5 lg:px-12 py-16 lg:py-24">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-7xl mx-auto">
+          <div className="gap-12 lg:gap-20 items-center max-w-7xl mx-auto">
 
             {/* Text */}
-            <div className="order-2 lg:order-1 text-center lg:text-left">
+            <div className="text-center lg:text-left">
               <h1 className="text-4xl sm:text-5xl lg:text-7xl font-serif font-bold text-white leading-[1.05] tracking-tight mb-6">
-                {hero.headline}
+                {hero.headline.split('\n').map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    {i < hero.headline.split('\n').length - 1 && <br className="hidden lg:inline" />}
+                  </span>
+                ))}
               </h1>
 
               <p className="text-base lg:text-xl text-white/75 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
@@ -119,24 +124,6 @@ export default function NewHero({ content }: NewHeroProps) {
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* Product image */}
-            <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-              {hero.productImage ? (
-                <div className="relative">
-                  <div className="absolute inset-0 bg-[#2E6EBB]/30 rounded-3xl blur-3xl scale-90 translate-y-4" />
-                  <img
-                    src={hero.productImage}
-                    alt="AirHydra In-Flight Hydrating Gel"
-                    className="relative w-72 sm:w-[26rem] lg:w-[28rem] xl:w-[32rem] h-auto object-contain drop-shadow-2xl"
-                  />
-                </div>
-              ) : (
-                <div className="w-72 sm:w-[26rem] lg:w-[36rem] aspect-[3/4] rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center">
-                  <p className="text-white/30 text-sm">Product Image</p>
-                </div>
-              )}
             </div>
 
           </div>

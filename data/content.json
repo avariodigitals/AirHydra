@@ -1,25 +1,22 @@
 {
   "hero": {
-    "headline": "Glow All Flight Long.",
-    "subheadline": "Premium In-Flight Hydrating Gel Designed To Keep Your Skin Fresh, Dewy & Radiant At Altitude.",
+    "headline": "Glow All Flight Long\nwith Airhydra",
+    "subheadline": "Elevate your journey with our premium in-flight hydrating gel. Dermatologist-crafted to combat altitude stress, ensuring you arrive as radiant as you depart.",
     "primaryCtaText": "Order on WhatsApp",
-    "primaryCtaPrefill": "Hi AirHydra, I want to order the In-Flight Hydrating Gel",
+    "primaryCtaPrefill": "Hi AirHydra, I'd like to order the premium In-Flight Hydrating Gel",
     "secondaryCtaText": "Find Pickup Store",
-    "heroImage": "https://ik.imagekit.io/360t0n1jd9/airhydra/hero/taha-RwVqa6ST69E-unsplash_23pW_VMqX.jpg",
+    "heroImage": "/images/landscreen.png",
     "productImage": "https://ik.imagekit.io/360t0n1jd9/airhydra/product/IMG_7789-removebg-preview_AnXmZSqx1.png",
-    "overlayOpacity": 0.15,
+    "overlayOpacity": 0.05,
     "trustBadges": [
-      "TSA Cabin Friendly",
-      "Dermatologist Safe",
-      "Premium Travel Formula",
-      "Fast Nationwide Delivery"
+      "Dermatologist Recommended"
     ],
     "heroImageFileId": "69f49a3e5c7cd75eb8d9f604",
     "productImageFileId": "69f49a555c7cd75eb8da6cda"
   },
   "productGallery": {
-    "headline": "The Product",
-    "subheadline": "Premium in-flight hydration, beautifully crafted.",
+    "headline": "Luxury In-Flight Hydration",
+    "subheadline": "Crafted for the discerning traveler who demands excellence at 30,000 feet.",
     "images": [
       {
         "url": "https://ik.imagekit.io/360t0n1jd9/airhydra/IMG_7791.PNG",
@@ -38,19 +35,28 @@
       }
     ]
   },
+  "beforeAfter": {
+    "headline": "See the Transformation",
+    "subheadline": "Real results from real flights. Experience the difference AirHydra makes.",
+    "beforeImage": "/images/before-hydra.png",
+    "afterImage": "/images/after-hydra.png",
+    "beforeLabel": "Before AirHydra",
+    "afterLabel": "After AirHydra",
+    "description": "Our altitude-adaptive formula restores moisture instantly—revealing visibly plumper, fresher, more radiant skin mid-flight."
+  },
   "problem": {
-    "headline": "Cabin Air Is Destroying Your Skin",
-    "description": "Aircraft cabins have humidity levels as low as 10% — far below the 40–60% your skin needs. Every long-haul flight leaves you dehydrated, puffy, and dull.",
+    "headline": "Cabin Air Is Quietly Dehydrating Your Skin",
+    "description": "Aircraft cabins can drop to humidity levels as low as 10%—far below what healthy skin requires. Within hours, moisture is stripped from your complexion, leaving skin dry, tight, puffy, and visibly fatigued before arrival.",
     "problemPoints": [
       {
-        "title": "Extreme Dryness",
-        "description": "Low cabin humidity strips moisture from your skin within the first hour of flight.",
+        "title": "Severe Moisture Loss",
+        "description": "Low cabin humidity rapidly depletes hydration, weakening your skin barrier and dulling your natural glow.",
         "image": "https://ik.imagekit.io/360t0n1jd9/airhydra/problem/tony-sebastian-Qw89HvIVu18-unsplash_CNkLSO7DG.jpg",
         "imageFileId": "69f4a33d5c7cd75eb816e429"
       },
       {
         "title": "Puffiness and Fatigue",
-        "description": "Recirculated air and pressure changes cause inflammation and visible tiredness.",
+        "description": "Air pressure changes and dehydration contribute to swelling, tired eyes, and a visibly stressed complexion.",
         "image": "https://ik.imagekit.io/360t0n1jd9/airhydra/problem/bhakti-parab-mtaVk-h7lgk-unsplash_IMPIOPI9d.jpg",
         "imageFileId": "69f4a6565c7cd75eb830015c"
       }
@@ -91,46 +97,46 @@
     "steps": [
       {
         "step": "01",
-        "title": "Cleanse",
-        "desc": "Start with a clean face before boarding or shortly after takeoff."
+        "title": "Prep",
+        "desc": "Begin with freshly cleansed skin before boarding or shortly after takeoff."
       },
       {
         "step": "02",
         "title": "Apply",
-        "desc": "Smooth a small amount of AirHydra over your face and neck."
+        "desc": "Smooth a small amount of AirHydra over face and neck."
       },
       {
         "step": "03",
-        "title": "Arrive Glowing",
-        "desc": "Reapply every 2–3 hours and land looking refreshed and radiant."
+        "title": "Refresh",
+        "desc": "Reapply every 2–3 hours to maintain hydration throughout your journey."
       }
     ]
   },
   "lifestyle": {
-    "headline": "Your Skin Deserves First-Class Treatment",
-    "description": "AirHydra is more than skincare — it's a ritual for the discerning traveller. Engineered for altitude, designed for luxury. Because how you arrive matters.",
+    "headline": "Skincare That Travels First-Class",
+    "description": "IAirHydra is more than skincare—it is your in-flight beauty ritual. Designed for discerning travelers who refuse to compromise on how they arrive.",
     "ctaText": "Order on WhatsApp",
-    "ctaPrefill": "Hi AirHydra, I'd like to order — I want to glow all flight long.",
+    "ctaPrefill": "Hi AirHydra, I'd like to order — I deserve first-class skin care.",
     "image": "https://ik.imagekit.io/360t0n1jd9/airhydra/lifestyle/IMG_7791_4jr7fGE5-.PNG",
     "imageFileId": "69f4aa6b5c7cd75eb84b3998"
   },
   "testimonials": {
-    "headline": "Loved by Frequent Flyers",
+    "headline": "Loved by Frequent Flyers Worldwide",
     "testimonialsList": [
       {
         "name": "Jessica W.",
         "rating": 5,
-        "text": "I used to land with such dull, tired skin. AirHydra is a game-changer. I now arrive looking and feeling fresh."
+        "text": "My skin no longer feels dry or tired after flights. AirHydra has become a permanent part of my carry-on."
       },
       {
         "name": "Alex T.",
         "rating": 5,
-        "text": "As a frequent business traveler, this is a must-have. It's the first thing I pack. No more post-flight breakouts."
+        "text": "The first skincare product I have used specifically for flying that actually delivers."
       },
       {
         "name": "Priya M.",
         "rating": 5,
-        "text": "Finally a product that actually works at altitude. My skin feels incredible after every long-haul flight."
+        "text": "My skin looked fresher after landing than before takeoff. Truly impressive."
       }
     ]
   },
@@ -171,23 +177,23 @@
     "faqList": [
       {
         "question": "Is AirHydra suitable for all skin types?",
-        "answer": "Yes! Our formula is dermatologist-tested and designed to be gentle and effective for sensitive, oily, dry, and combination skin."
+        "answer": "Yes. Our formula is dermatologist-tested and suitable for dry, oily, combination, and sensitive skin."
       },
       {
         "question": "How often should I apply it during a flight?",
-        "answer": "For best results, we recommend applying a small amount every 2–3 hours during your flight to maintain optimal hydration levels."
+        "answer": "We recommend every 2–3 hours, depending on flight duration and skin needs."
       },
       {
-        "question": "Can I use it even if I'm not flying?",
-        "answer": "Absolutely. AirHydra is a fantastic daily moisturizer, perfect for combating dry environments like air-conditioned offices or cold climates."
+        "question": "Can I use it when I am not flying?",
+        "answer": "Absolutely. AirHydra performs beautifully in any dry environment, including offices, hotels, and air-conditioned spaces."
       }
     ]
   },
   "finalCta": {
-    "headline": "Glow All Flight Long.",
-    "description": "Join thousands of travellers who refuse to land looking tired. Order AirHydra now — fast delivery or in-store pickup available.",
+    "headline": "Elevate Your Travel Experience",
+    "description": "Join discerning travelers who have made AirHydra their in-flight essential for radiant arrivals.",
     "ctaText": "Order AirHydra on WhatsApp",
-    "ctaPrefill": "Hi AirHydra, I'm ready to order the In-Flight Hydrating Gel."
+    "ctaPrefill": "Hi AirHydra, I'm ready to elevate my travel with the premium In-Flight Hydrating Gel."
   },
   "settings": {
     "whatsappNumber": "+2347072387362",
