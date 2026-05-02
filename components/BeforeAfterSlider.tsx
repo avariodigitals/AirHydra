@@ -65,18 +65,12 @@ export default function BeforeAfterSlider({
         </div>
 
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-transparent p-6">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 text-white">
+          <div className="flex flex-row items-end justify-between gap-4 text-white">
             <div>
-              <span className="inline-flex items-center uppercase tracking-[0.24em] text-[0.65rem] font-semibold text-white/80">
-                Before
-              </span>
-              <h3 className="mt-2 text-2xl sm:text-3xl font-serif tracking-tight">{beforeLabel}</h3>
+              <h3 className="text-2xl sm:text-3xl font-serif tracking-tight font-bold">{beforeLabel}</h3>
             </div>
             <div>
-              <span className="inline-flex items-center uppercase tracking-[0.24em] text-[0.65rem] font-semibold text-white/80">
-                After
-              </span>
-              <h3 className="mt-2 text-2xl sm:text-3xl font-serif tracking-tight">{afterLabel}</h3>
+              <h3 className="text-2xl sm:text-3xl font-serif tracking-tight font-bold">{afterLabel}</h3>
             </div>
           </div>
         </div>

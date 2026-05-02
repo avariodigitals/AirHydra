@@ -128,33 +128,6 @@ export default function NewHero({ content }: NewHeroProps) {
                 ))}
               </div>
             </div>
-
-            {/* Product image */}
-            <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-              {hero.productImage ? (
-                <div className="relative flex justify-center items-center">
-                  {/* Radial glow around the image */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background: "radial-gradient(ellipse at 50% 50%, rgba(140,190,255,0.7) 0%, rgba(46,110,187,0.45) 45%, transparent 70%)",
-                      filter: "blur(28px)",
-                      transform: "scale(1.2)",
-                    }}
-                  />
-                  <img
-                    src={hero.productImage}
-                    alt="AirHydra In-Flight Hydrating Gel"
-                    className="relative w-72 sm:w-[26rem] lg:w-[28rem] xl:w-[32rem] h-auto object-contain"
-                    style={{ filter: "drop-shadow(0 0 50px rgba(140,190,255,0.75)) drop-shadow(0 0 100px rgba(46,110,187,0.55))" }}
-                  />
-                </div>
-              ) : (
-                <div className="w-72 sm:w-[26rem] lg:w-[36rem] aspect-[3/4] rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center">
-                  <p className="text-white/30 text-sm">Product Image</p>
-                </div>
-              )}
-            </div>
           </div>
         </div>
       </div>

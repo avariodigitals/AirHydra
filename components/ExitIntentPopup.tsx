@@ -65,12 +65,12 @@ export default function ExitIntentPopup({ whatsappNumber }: { whatsappNumber?: s
           </svg>
         </div>
 
-        <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#2E6EBB] mb-3">Wait — Don't Leave Yet</p>
+        <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#2E6EBB] mb-3">YOUR TRAVEL ESSENTIAL AWAITS</p>
         <h2 className="text-2xl lg:text-3xl font-serif text-[#0c1e3c] mb-3 leading-tight">
-          Get Launch Pricing Before It Ends
+          Never Arrive Looking <p></p>Jet-Lagged Again
         </h2>
         <p className="text-[#2E6EBB]/70 text-sm leading-relaxed mb-7">
-          First batch pricing closes soon. Order AirHydra now and land glowing on every flight.
+          AirHydra keeps your skin hydrated, luminous, and refreshed from takeoff to touchdown.
         </p>
 
         <WhatsAppButton
@@ -85,7 +85,7 @@ export default function ExitIntentPopup({ whatsappNumber }: { whatsappNumber?: s
           onClick={dismiss}
           className="mt-4 text-xs text-gray-400 hover:text-gray-600 transition-colors"
         >
-          No thanks, I'll pay full price later
+          No thanks, I'll buy later
         </button>
       </div>
     </div>
