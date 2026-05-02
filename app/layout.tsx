@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Onest, Space_Grotesk, Roboto } from "next/font/google";
+import { Onest, Space_Grotesk, Roboto, Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@/components/Analytics";
 
@@ -17,6 +17,18 @@ const roboto = Roboto({
   subsets: ["latin"],
   variable: "--font-roboto",
   weight: ["300", "400", "500", "700", "900"],
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  weight: ["400", "500", "600", "700"],
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  weight: ["300", "400", "500", "600"],
 });
 
 const BASE_URL = "https://airhydra.com";
@@ -95,7 +107,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${onest.variable} ${spaceGrotesk.variable} ${roboto.variable}`}>
+    <html lang="en" className={`${onest.variable} ${spaceGrotesk.variable} ${roboto.variable} ${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
         <meta name="theme-color" content="#2E6EBB" />
         <link rel="canonical" href={BASE_URL} />

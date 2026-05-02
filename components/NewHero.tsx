@@ -15,6 +15,8 @@ interface NewHeroProps {
     };
     settings?: {
       urgencyText?: string;
+      marqueeText?: string;
+      whatsappNumber?: string;
     };
   };
 }
@@ -30,7 +32,7 @@ export default function NewHero({ content }: NewHeroProps) {
   const { hero, settings } = content;
   const overlay = hero.overlayOpacity ?? 0.52;
   const badges = hero.trustBadges?.length ? hero.trustBadges : defaultTrustBadges;
-  const urgency = settings?.urgencyText ?? "Limited First Batch — Introductory Pricing Ends Soon";
+  const marquee = settings?.marqueeText ?? "First batch now available.  ·  Order yours today.";
 
   return (
     <section className="relative min-h-[100svh] flex flex-col overflow-hidden bg-[#0c1e3c]">
@@ -66,7 +68,7 @@ export default function NewHero({ content }: NewHeroProps) {
             .marquee-text { animation: marquee 18s linear infinite; display: inline-block; white-space: nowrap; }
           `}</style>
           <p className="marquee-text text-white/70 text-xs font-medium tracking-[0.18em] uppercase">
-            Now selling premium In-Flight Hydrating Gel.&nbsp;&nbsp;·&nbsp;&nbsp;Order yours today.&nbsp;&nbsp;·&nbsp;&nbsp;Now selling premium In-Flight Hydrating Gel.&nbsp;&nbsp;·&nbsp;&nbsp;Order yours today.
+            {marquee}&nbsp;&nbsp;·&nbsp;&nbsp;{marquee}
           </p>
         </div>
       </div>
@@ -98,6 +100,7 @@ export default function NewHero({ content }: NewHeroProps) {
                   prefillMessage={hero.primaryCtaPrefill}
                   className="w-full sm:w-auto px-8 py-4 text-base font-semibold tracking-wide shadow-[0_20px_50px_rgba(46,110,187,0.4)]"
                   trackingId="hero_primary"
+                  whatsappNumber={settings?.whatsappNumber}
                 />
                 {hero.secondaryCtaText && (
                   <a
@@ -126,6 +129,32 @@ export default function NewHero({ content }: NewHeroProps) {
               </div>
             </div>
 
+            {/* Product image */}
+            <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+              {hero.productImage ? (
+                <div className="relative flex justify-center items-center">
+                  {/* Radial glow around the image */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: "radial-gradient(ellipse at 50% 50%, rgba(140,190,255,0.7) 0%, rgba(46,110,187,0.45) 45%, transparent 70%)",
+                      filter: "blur(28px)",
+                      transform: "scale(1.2)",
+                    }}
+                  />
+                  <img
+                    src={hero.productImage}
+                    alt="AirHydra In-Flight Hydrating Gel"
+                    className="relative w-72 sm:w-[26rem] lg:w-[28rem] xl:w-[32rem] h-auto object-contain"
+                    style={{ filter: "drop-shadow(0 0 50px rgba(140,190,255,0.75)) drop-shadow(0 0 100px rgba(46,110,187,0.55))" }}
+                  />
+                </div>
+              ) : (
+                <div className="w-72 sm:w-[26rem] lg:w-[36rem] aspect-[3/4] rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center">
+                  <p className="text-white/30 text-sm">Product Image</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ import FaqAccordion from "@/components/FaqAccordion";
 import StickyCTA from "@/components/StickyCTA";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import Productlay from "@/components/productlay";
+import CurrentYear from "@/components/CurrentYear";
 import { getContent } from "@/lib/content";
 
 export default async function Home() {
@@ -21,7 +22,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-cream text-[#2E6EBB]">
+    <main className="min-h-screen bg-cream text-[#2E6EBB]" suppressHydrationWarning>
 
       {/* ── JSON-LD Structured Data ───────────────────────────────── */}
       <script
@@ -40,7 +41,7 @@ export default async function Home() {
             "aggregateRating": {
               "@type": "AggregateRating",
               "ratingValue": "5",
-              "reviewCount": "3",
+              "reviewCount": String(content.testimonials.testimonialsList.length),
               "bestRating": "5",
               "worstRating": "1"
             },
@@ -186,6 +187,7 @@ export default async function Home() {
                 prefillMessage={content.lifestyle.ctaPrefill}
                 className="w-full sm:w-auto"
                 trackingId="lifestyle"
+                whatsappNumber={content.settings.whatsappNumber}
               />
             </div>
 
@@ -268,6 +270,7 @@ export default async function Home() {
                     variant="secondary"
                     className="w-full"
                     trackingId={`store_${i}`}
+                    whatsappNumber={content.settings.whatsappNumber}
                   />
                   {store.mapsLink && (
                     <a href={store.mapsLink} target="_blank" rel="noopener noreferrer"
@@ -326,13 +329,14 @@ export default async function Home() {
               variant="secondary"
               className="w-full sm:w-auto"
               trackingId="final_cta"
+              whatsappNumber={content.settings.whatsappNumber}
             />
           </div>
 
           {/* Footer bottom bar */}
           <div className="mt-14 pt-6 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-2">
             <p className="text-white/40 text-xs tracking-wide">
-              &copy; {new Date().getFullYear()} AirHydra. All rights reserved.
+              &copy; <CurrentYear /> AirHydra. All rights reserved.
             </p>
             <p className="text-white/30 text-xs tracking-wide">
               Website designed &amp; developed by{" "}
@@ -346,7 +350,7 @@ export default async function Home() {
       <div className="h-20 md:hidden" />
 
       <StickyCTA />
-      <ExitIntentPopup />
+      <ExitIntentPopup whatsappNumber={content.settings.whatsappNumber} />
     </main>
   );
 }

@@ -65,7 +65,6 @@ function ImageUploader({
   onUploaded: (result: { url: string; fileId?: string }) => void;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [staged, setStaged] = useState<File | null>(null);
   const [stagedPreview, setStagedPreview] = useState("");
   const [progress, setProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
@@ -75,34 +74,31 @@ function ImageUploader({
   const handlePick = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    setStaged(file);
     setStagedPreview(URL.createObjectURL(file));
     setDone(false);
     setError("");
     setProgress(0);
     e.target.value = "";
+    // auto-upload immediately
+    uploadFile(file);
   };
 
-  const handleUpload = async () => {
-    if (!staged) return;
+  const uploadFile = async (file: File) => {
     setError("");
     setUploading(true);
     setProgress(0);
     setDone(false);
 
     try {
-      // 1. Get auth params from our server (fast — no file involved)
       const authRes = await fetch("/api/imagekit-auth");
       if (!authRes.ok) throw new Error("Auth failed");
       const { token, expire, signature } = await authRes.json();
 
-      const publicKey = process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY!;
-
       const form = new FormData();
-      form.append("file", staged);
-      form.append("fileName", staged.name);
+      form.append("file", file);
+      form.append("fileName", file.name);
       form.append("folder", folder);
-      form.append("publicKey", publicKey);
+      form.append("publicKey", process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY!);
       form.append("signature", signature);
       form.append("expire", String(expire));
       form.append("token", token);
@@ -114,17 +110,13 @@ function ImageUploader({
           if (e.lengthComputable) setProgress(Math.round((e.loaded / e.total) * 100));
         };
         xhr.onload = () => {
-          if (xhr.status >= 200 && xhr.status < 300) {
-            resolve(JSON.parse(xhr.responseText));
-          } else {
-            reject(new Error(JSON.parse(xhr.responseText)?.message || "Upload failed"));
-          }
+          if (xhr.status >= 200 && xhr.status < 300) resolve(JSON.parse(xhr.responseText));
+          else reject(new Error(JSON.parse(xhr.responseText)?.message || "Upload failed"));
         };
         xhr.onerror = () => reject(new Error("Network error"));
         xhr.send(form);
       });
 
-      // 3. Delete old asset in background (non-blocking)
       if (currentFileId) {
         fetch("/api/upload", {
           method: "DELETE",
@@ -136,7 +128,6 @@ function ImageUploader({
       setProgress(100);
       setDone(true);
       setUploading(false);
-      setStaged(null);
       onUploaded({ url: data.url, fileId: data.fileId });
     } catch (err: any) {
       setError(err.message);
@@ -154,11 +145,7 @@ function ImageUploader({
       {displayUrl && (
         <div className="mb-4 rounded-2xl overflow-hidden bg-cream aspect-video w-full max-w-sm relative">
           <img src={displayUrl} alt="Preview" className="w-full h-full object-cover" />
-          {staged && !uploading && (
-            <div className="absolute top-2 right-2 bg-amber-400 text-white text-xs font-medium px-2 py-1 rounded-full">
-              Not uploaded yet
-            </div>
-          )}
+
           {done && (
             <div className="absolute top-2 right-2 bg-green-500 text-white text-xs font-medium px-2 py-1 rounded-full flex items-center gap-1">
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -199,19 +186,6 @@ function ImageUploader({
           </svg>
           {displayUrl ? "Choose Different" : "Choose Image"}
         </button>
-
-        {staged && !uploading && (
-          <button
-            type="button"
-            onClick={handleUpload}
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-full text-sm font-medium hover:bg-primary/90 transition-colors shadow-md"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-            </svg>
-            Upload Now
-          </button>
-        )}
       </div>
 
       {error && <p className="mt-2 text-red-500 text-xs">{error}</p>}
@@ -225,12 +199,11 @@ export default function AdminDashboard() {
   const [content, setContent] = useState<Content | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [toast, setToast] = useState<{ show: boolean; success: boolean }>({ show: false, success: true });
   const router = useRouter();
 
   useEffect(() => {
-    const isAuth = localStorage.getItem("adminAuth");
-    if (!isAuth) { router.push("/admin"); return; }
     loadContent();
   }, []);
 
@@ -256,10 +229,7 @@ export default function AdminDashboard() {
     try {
       const res = await fetch("/api/content", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_ADMIN_KEY}`,
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(content),
       });
       showToast(res.ok);
@@ -293,55 +263,104 @@ export default function AdminDashboard() {
     );
   }
 
+  const SidebarContent = ({ onSelect }: { onSelect?: () => void }) => (
+    <>
+      <h1 className="text-2xl font-serif mb-8">AirHydra Admin</h1>
+      <nav className="space-y-2 flex-1">
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => { setActiveTab(tab.id); onSelect?.(); }}
+            className={`w-full text-left px-4 py-3 rounded-full text-sm transition-colors ${
+              activeTab === tab.id ? "bg-primary text-white" : "text-gray-700 hover:bg-cream"
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </nav>
+      <button
+        onClick={async () => {
+          await fetch("/api/admin-logout", { method: "POST" });
+          router.push("/admin");
+        }}
+        className="w-full px-4 py-3 text-gray-500 hover:text-gray-800 text-left text-sm"
+      >
+        Logout
+      </button>
+    </>
+  );
+
   return (
     <div className="min-h-screen bg-cream">
       <Toast show={toast.show} success={toast.success} />
 
+      {/* Mobile drawer overlay */}
+      {sidebarOpen && (
+        <div
+          className="lg:hidden fixed inset-0 z-40 bg-black/40"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Mobile drawer */}
+      <div className={`lg:hidden fixed top-0 left-0 h-full w-64 bg-white z-50 p-6 flex flex-col shadow-2xl transition-transform duration-300 ${
+        sidebarOpen ? "translate-x-0" : "-translate-x-full"
+      }`}>
+        <SidebarContent onSelect={() => setSidebarOpen(false)} />
+      </div>
+
       <div className="flex min-h-screen">
-        {/* Sidebar */}
-        <div className="w-64 bg-white border-r border-gray-200 p-6 flex flex-col">
-          <h1 className="text-2xl font-serif mb-8">AirHydra Admin</h1>
-          <nav className="space-y-2 flex-1">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`w-full text-left px-4 py-3 rounded-full text-sm transition-colors ${
-                  activeTab === tab.id ? "bg-primary text-white" : "text-gray-700 hover:bg-cream"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </nav>
-          <button
-            onClick={() => { localStorage.removeItem("adminAuth"); router.push("/admin"); }}
-            className="w-full px-4 py-3 text-gray-500 hover:text-gray-800 text-left text-sm"
-          >
-            Logout
-          </button>
+        {/* Desktop sidebar */}
+        <div className="hidden lg:flex w-64 bg-white border-r border-gray-200 p-6 flex-col shrink-0">
+          <SidebarContent />
         </div>
 
         {/* Main */}
-        <div className="flex-1 p-8">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-serif capitalize">{activeTab}</h2>
+        <div className="flex-1 min-w-0 flex flex-col">
+          {/* Mobile top bar */}
+          <div className="lg:hidden flex items-center justify-between px-4 py-4 bg-white border-b border-gray-200 sticky top-0 z-30">
+            <button onClick={() => setSidebarOpen(true)} className="p-2 -ml-2 text-gray-700">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            <h1 className="text-lg font-serif">AirHydra Admin</h1>
             <button
               onClick={saveContent}
               disabled={saving}
-              className="bg-primary text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 flex items-center gap-2"
+              className="bg-primary text-white px-5 py-2 rounded-full text-sm font-medium disabled:opacity-50 flex items-center gap-1.5"
             >
               {saving && (
-                <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                <svg className="w-3.5 h-3.5 animate-spin" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                 </svg>
               )}
-              {saving ? "Saving…" : "Save Changes"}
+              {saving ? "Saving…" : "Save"}
             </button>
           </div>
 
-          <div className="bg-white p-8 rounded-3xl shadow-sm">
+          <div className="flex-1 p-4 lg:p-8">
+            {/* Desktop header */}
+            <div className="hidden lg:flex justify-between items-center mb-8">
+              <h2 className="text-3xl font-serif capitalize">{activeTab}</h2>
+              <button
+                onClick={saveContent}
+                disabled={saving}
+                className="bg-primary text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 flex items-center gap-2"
+              >
+                {saving && (
+                  <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                  </svg>
+                )}
+                {saving ? "Saving…" : "Save Changes"}
+              </button>
+            </div>
+
+          <div className="bg-white p-4 lg:p-8 rounded-3xl shadow-sm">
             {content && (
               <>
                 {activeTab === "hero" && (
@@ -527,7 +546,7 @@ export default function AdminDashboard() {
                   </div>
                 )}
 
-                {activeTab === "problem" && (
+                {activeTab === "lifestyle" && (
                   <div className="space-y-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Headline</label>
@@ -617,7 +636,7 @@ export default function AdminDashboard() {
                   <div className="space-y-4">
                     {content.testimonials.testimonialsList.map((testimonial: any, index: number) => (
                       <div key={index} className="border border-gray-200 p-6 rounded-2xl">
-                        <div className="grid grid-cols-2 gap-4 mb-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
                             <input
@@ -806,6 +825,16 @@ export default function AdminDashboard() {
                 {activeTab === "settings" && (
                   <div className="space-y-6">
                     <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Announcement Banner Text</label>
+                      <input
+                        type="text"
+                        value={content.settings.marqueeText ?? ""}
+                        onChange={(e) => updateContent("settings", { ...content.settings, marqueeText: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      />
+                      <p className="text-xs text-gray-400 mt-1">This scrolls across the top of the hero section.</p>
+                    </div>
+                    <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">WhatsApp Number</label>
                       <input
                         type="text"
@@ -827,6 +856,7 @@ export default function AdminDashboard() {
                 )}
               </>
             )}
+          </div>
           </div>
         </div>
       </div>
