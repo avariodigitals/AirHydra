@@ -66,10 +66,10 @@ export default function BeforeAfterSlider({
 
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-transparent p-6">
           <div className="flex flex-row items-end justify-between gap-4 text-white">
-            <div>
+            <div className={`transition-opacity duration-300 ${sliderPosition > 67 ? 'opacity-100' : sliderPosition > 33 ? 'opacity-100' : 'opacity-0'}`}>
               <h3 className="text-2xl sm:text-3xl font-serif tracking-tight font-bold">{beforeLabel}</h3>
             </div>
-            <div>
+            <div className={`transition-opacity duration-300 ${sliderPosition < 33 ? 'opacity-100' : sliderPosition < 67 ? 'opacity-100' : 'opacity-0'}`}>
               <h3 className="text-2xl sm:text-3xl font-serif tracking-tight font-bold">{afterLabel}</h3>
             </div>
           </div>
