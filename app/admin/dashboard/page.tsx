@@ -209,7 +209,9 @@ export default function AdminDashboard() {
 
   const loadContent = async () => {
     try {
-      const res = await fetch("/api/content");
+      const res = await fetch("/api/content", {
+        credentials: "include",
+      });
       setContent(await res.json());
     } catch (e) {
       console.error("Failed to load content", e);
@@ -230,6 +232,7 @@ export default function AdminDashboard() {
       const res = await fetch("/api/content", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(content),
       });
       showToast(res.ok);
